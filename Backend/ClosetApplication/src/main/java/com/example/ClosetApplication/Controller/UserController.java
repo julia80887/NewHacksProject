@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.ClosetApplication.Repository.UserRepository;
 import com.example.ClosetApplication.Documents.User;
+import com.example.ClosetApplication.Service.UserService;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,16 +20,20 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/create")
-    public String createUser(@RequestBody User user){
+    public int createUser(@RequestBody User user){
         String userName = user.getUserName();
         if(getUserbyUserName(userName) == null){
-            userRepository.insert(user);
-            return "Created User!";
+            if(UserService.isValid(user.getPassword())){
+                userRepository.insert(user);
+                return 1; // Return 1 if the User is created
+            }
+            else {
+                return -1; // Return -1 if the password inputed does not meet requirments
+            }
         }
         else{
-            return "There is already an account with this username";
+            return 0; // Return 0 if the User already exists
         }
-
 
     }
 
@@ -47,6 +52,7 @@ public class UserController {
     public User getUserbyUserName(@PathVariable String userName){
         return userRepository.findByUserName(userName);
     }
+
 
 
 
