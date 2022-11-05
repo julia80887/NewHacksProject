@@ -7,6 +7,7 @@ import com.example.ClosetApplication.Repository.UserRepository;
 import com.example.ClosetApplication.Documents.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/mycloset")
@@ -18,13 +19,22 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/create")
-    public void createUser(@RequestBody User user){
-        userRepository.insert(user);
+    public String createUser(@RequestBody User user){
+        String userName = user.getUserName();
+        if(getUserbyUserName(userName) == null){
+            userRepository.insert(user);
+            return "Created User!";
+        }
+        else{
+            return "There is already an account with this username";
+        }
+
+
     }
 
     // Changed PostMapping to DeleteMapping to make it more accurate
     @DeleteMapping("/delete/{id}")
-    public void deleteStudent(@PathVariable String id){
+    public void deleteUser(@PathVariable String id){
         userRepository.deleteById(id);
     }
 
@@ -32,4 +42,13 @@ public class UserController {
     public List<User> listUser(){
         return userRepository.findAll();
     }
+
+    @GetMapping("/list/{userName}")
+    public User getUserbyUserName(@PathVariable String userName){
+        return userRepository.findByUserName(userName);
+    }
+
+
+
+
 }
