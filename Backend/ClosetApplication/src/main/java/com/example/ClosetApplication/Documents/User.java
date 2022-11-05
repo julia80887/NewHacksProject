@@ -5,6 +5,12 @@ import org.springframework.data.annotation.Id;
 
 @Document(collection = "users")
 public class User {
+    public User(String firstName, String lastName, String userName, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
+    }
 
     @Id
     private String id;

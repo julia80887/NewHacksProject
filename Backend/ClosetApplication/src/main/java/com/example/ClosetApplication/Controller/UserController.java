@@ -19,6 +19,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    //In postman it is required to fill out param instead of body
     @PostMapping("/create")
     public int createUser(@RequestBody User user){
         String userName = user.getUserName();
@@ -36,6 +37,7 @@ public class UserController {
         }
 
     }
+
 
     // Changed PostMapping to DeleteMapping to make it more accurate
     @DeleteMapping("/delete/{id}")
