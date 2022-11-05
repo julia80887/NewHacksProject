@@ -19,14 +19,14 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/create")
-    public String createUser(@RequestBody User user){
+    public int createUser(@RequestBody User user){
         String userName = user.getUserName();
         if(getUserbyUserName(userName) == null){
             userRepository.insert(user);
-            return "Created User!";
+            return 1; // Return 1 if the User is created
         }
         else{
-            return "There is already an account with this username";
+            return 0; // Return 0 if the User already exists
         }
 
 
