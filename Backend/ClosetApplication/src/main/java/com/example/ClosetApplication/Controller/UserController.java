@@ -67,9 +67,19 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @GetMapping("/list/{userName}")
+    @GetMapping("/getUser/{userName}")
     public User getUserbyUserName(@PathVariable String userName){
         return userRepository.findByUserName(userName);
+    }
+
+    @GetMapping("/isValidUser")
+    public Boolean isValidUser(@RequestBody String userName){
+        if(userRepository.findByUserName(userName) == null){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     @GetMapping("/photos/{id}")
