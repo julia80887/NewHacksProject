@@ -14,7 +14,7 @@ export default function Login({ navigation}) {
       password
     }
     axios
-      .get('http://localhost:8080/mycloset/isValidUser', {user})
+      .get('http://100.67.94.157:8080/mycloset/isValidUser', {user})
       .then(function (response) {
         if (response) {
           navigation.navigate("UploadPhoto")

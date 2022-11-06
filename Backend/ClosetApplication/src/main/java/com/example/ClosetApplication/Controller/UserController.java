@@ -73,12 +73,16 @@ public class UserController {
     }
 
     @GetMapping("/isValidUser")
-    public Boolean isValidUser(@RequestBody String userName){
-        if(userRepository.findByUserName(userName) == null){
+    public Boolean isValidUser(@RequestParam String userName, @RequestParam String password) {
+        User user = userRepository.findByUserName(userName);
+        if (user == null) {
             return false;
-        }
-        else{
-            return true;
+        } else {
+            if (user.getPassword() == password) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 

@@ -1,16 +1,53 @@
 import React, { FC, ReactElement, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, SafeAreaView } from 'react-native';
 // import { StackActions } from '@react-navigation/native';
 // import Parse from "parse/react-native";
 
-export default function Signup({ navigation }) {
+
+export default function Login({ navigation}) {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  
+  
+
+  getLoginAPI = () =>{
+    let user = {
+      username,
+      password
+    }
+    axios
+      .get('http://100.67.94.157:8080/mycloset/create', {user})
+      .then(function (response) {
+        if (response) {
+          navigation.navigate("Login")
+        }
+      })
+      .catch(function (error) {
+        alert("error");
+      });
 
 
+  }
   return (
-    <View style={styles.container}>
+    <SafeAreaView>
+      <Text>Enter firstname:</Text>
+      <TextInput
+        style={styles.input}
+        value={username}
+        placeholder={"Firstname"}
+        onChangeText={(text) => setFirstname(text)}
+        autoCapitalize={"none"}
+      />
+      <TextInput
+        style={styles.input}
+        value={username}
+        placeholder={"Lastname"}
+        onChangeText={(text) => setLastname(text)}
+        autoCapitalize={"none"}
+      />
       <Text>Enter username:</Text>
       <TextInput
         style={styles.input}
@@ -30,9 +67,8 @@ export default function Signup({ navigation }) {
       <Button title={"Sign Up"} onPress={() => {}} />
 
       <Button title="Go back to Home" onPress={() => navigation.popToTop()} />
-      <Button title="Go to Login" onPress={() => navigation.pop()} />
       <StatusBar style="auto" />
-      </View>
+    </SafeAreaView>
   );
 }
 
@@ -43,6 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   input: {
     //flex: 1,
     borderwidth: 1,
@@ -54,6 +91,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   navigate: {
     //flex: 1,
     borderwidth: 1,
@@ -66,4 +104,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
 });
