@@ -8,6 +8,7 @@ export default function Signup({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+
   return (
     <View style={styles.container}>
       <Text>Enter username:</Text>

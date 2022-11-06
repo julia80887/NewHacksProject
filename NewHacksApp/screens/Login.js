@@ -2,11 +2,30 @@ import { StatusBar } from 'expo-status-bar';
 import React, { FC, ReactElement, useState } from "react";
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 //import { StackActions } from '@react-navigation/native';
+import axios from 'react';
 
 export default function Login({ navigation}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  getLoginAPI = () =>{
+    let user = {
+      username,
+      password
+    }
+    axios
+      .get('http://localhost:8080/mycloset/isValidUser', {user})
+      .then(function (response) {
+        if (response) {
+          navigation.navigate("UploadPhoto")
+        }
+      })
+      .catch(function (error) {
+        alert("error");
+      });
+
+
+  }
   return (
     <>
       <Text>Enter username:</Text>
@@ -25,15 +44,16 @@ export default function Login({ navigation}) {
         secureTextEntry
         onChangeText={(text) => setPassword(text)}
       />
+      <Button 
+        title="Login"
+        onPress={() => getLoginAPI()}
+      />
+      
 
       
       <Button 
         title='Go to Sign Up'
         onPress={() => navigation.navigate("Signup")}
-      />
-      <Button 
-        title="Go to Upload Page"
-        onPress={() => navigation.navigate("UploadPhoto")}
       />
       <StatusBar style="auto" />
     </>

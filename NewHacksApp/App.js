@@ -22,6 +22,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUser] = useState("");
  
 
 
