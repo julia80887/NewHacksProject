@@ -1,8 +1,8 @@
 import React, { FC, ReactElement, useState } from "react";
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
-import { StackActions } from '@react-navigation/native';
-import Parse from "parse/react-native";
+// import { StackActions } from '@react-navigation/native';
+// import Parse from "parse/react-native";
 
 export default function Signup({ navigation }) {
   const [username, setUsername] = useState("");

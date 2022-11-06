@@ -14,6 +14,7 @@ import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import UploadPhoto from "./screens/UploadPhoto";
 
 
 const Stack = createNativeStackNavigator(); 
@@ -35,6 +36,10 @@ export default function App() {
         <Stack.Screen 
           name="Login"
           component={Login}
+        />
+        <Stack.Screen 
+          name="UploadPhoto"
+          component={UploadPhoto}
         />
         <Stack.Screen 
           name="Signup"

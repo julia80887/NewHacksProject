@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { StackActions } from '@react-navigation/native';
+// import { StackActions } from '@react-navigation/native';
 
 export default function Login({ navigation}) {
 
@@ -8,7 +8,11 @@ export default function Login({ navigation}) {
     <>
       <Button 
         title='Go to Sign Up'
-        onPress={() => navigation.push("Signup")}
+        onPress={() => navigation.navigate("Signup")}
+      />
+      <Button 
+        title="Go to Upload Page"
+        onPress={() => navigation.navigate("UploadPhoto")}
       />
       <StatusBar style="auto" />
     </>
